@@ -6,7 +6,8 @@ DSL-model is a sample library showing how to build a dsl lib in Clojure.
 
 ## Usage
 
-FIXME
+[![Clojars Project](https://img.shields.io/clojars/v/org.clojars.abdullin/cljdsl.svg)](https://clojars.org/org.clojars.abdullin/cljdsl)
+
 
 ## License
 
