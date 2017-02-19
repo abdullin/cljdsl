@@ -4,4 +4,14 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :signing {:gpg-key "rinat@abdullin.com"}
-  :dependencies [[org.clojure/clojure "1.8.0"]])
+  :dependencies [
+                 [org.clojure/clojure "1.8.0"]
+                 [cljfmt "0.5.6"]
+
+                 ]
+
+  
+  :main cljdsl.main
+
+
+  )

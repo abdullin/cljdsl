@@ -1,21 +1,19 @@
 (ns cljdsl.model
-
-
   (:refer-clojure :exclude [type])
   (:require
-
    [clojure.java.io :as io]
    [clojure.string :as str]
    [clojure.walk :refer [postwalk-replace]]
-   ))
+   )
+  (:gen-class))
 
 
 (defn- new-model [] { :counter 0 })
 (def ^{:private true} model (atom (new-model)))
 
-
-
-(defn reset! [] (swap! model (fn [_] (new-model))))
+(defn clear!
+  "Remove all data from the model"
+  [] (swap! model (fn [_] (new-model))))
 
 
 
