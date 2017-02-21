@@ -5,27 +5,19 @@
    [clojure.java.io :as io]
    [clojure.string :as str]
    [cljdsl.model :refer [get-model add! get-nodes]]
-   [cljfmt.core :refer [reformat-string default-indents]]
+   [cljfmt.core :as cljfmt]
+   [cljdsl.lang :as lang]
+   [cljdsl.go :as go]
    ) 
   (:gen-class))
 
 
-(def dsl-indents (merge default-indents
-
-{
-
- 'space        [[:inner 0]]
- 'group       [[:inner 1]]
- 'lmdb [[:inner 0]]
- 
- }
-
-                        ))
+(def dsl-indents (merge cljfmt/default-indents lang/indents))
 
 (defn reformat [f]
   (let [original (slurp f)]
     (try
-      (let [revised (reformat-string original {:indents dsl-indents})]
+      (let [revised (cljfmt/reformat-string original {:indents dsl-indents})]
         (when (not= original revised)
           (println "Reformatting" f)
           (spit f revised)))
@@ -35,15 +27,14 @@
 
 (defn -main [& args]
   (println "DSL tool")
-  (println dsl-indents)
 
   (doseq [a args]
     (reformat a)
     (println "Loading " a)
-    
     (load-file a))
 
-  (println (count  (get-nodes)))
+  (println "Loaded" (count  (get-nodes)) "language elements" )
+  (go/gen!)
 
 ;;  (generate/csharp!)
   

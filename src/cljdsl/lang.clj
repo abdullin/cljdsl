@@ -2,9 +2,28 @@
   (:refer-clojure :exclude [alias group] :rename {set core-set})
   (:require
    [clojure.string :as str]
-   [cljdsl.model :refer [add! get-nodes]]))
+   [cljdsl.model :as model :refer [add! get-nodes]]))
 
 
+(def indents
+  "Indentation for cljfmt"
+  {'group       [[:inner 1]]})
+
+
+(defn go-project [root]
+  (model/merge! {:go {:root root}})
+  )
+
+
+(defn enum' [id doc base fs]
+  {:node-type :enum :id id :type-ref base :doc doc :fields fs})
+
+(defmacro enum
+  "Define an enum inside package"
+  [id doc base fields]
+  (list enum' (list 'quote id) doc (list 'quote base) (list 'quote fields))
+
+  )
 
 (defn user-type'
   ([id doc fields keywords]
@@ -64,10 +83,11 @@
                   )))))
 
 (defn unfold-alias [{:keys [id type-ref ns] :as node} nodes]
-  ;; skip complex types for now
   (let [choice (resolve-id type-ref ns nodes)]
     (assert choice (str "Not found ref " type-ref " from alias" node))
     (assoc node :type-ref (:id choice))))
+
+
 
 (defn unfold-group-node [node nodes]
   (case (:node-type node)

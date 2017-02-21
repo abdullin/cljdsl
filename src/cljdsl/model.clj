@@ -9,7 +9,7 @@
 
 
 (defn- new-model [] { :counter 0 })
-(def ^{:private true} model (atom (new-model)))
+(def model (atom (new-model)))
 
 (defn clear!
   "Remove all data from the model"
@@ -19,6 +19,9 @@
 
 (defn get-model [] @model)
 (defn get-nodes [] (:nodes (get-model)))
+
+
+(defn merge! [mp] (swap! model (fn [mod] (merge mod mp))))
 
 
 (defn get-by-types
