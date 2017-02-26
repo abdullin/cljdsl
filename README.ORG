@@ -1,22 +1,20 @@
-# dsl-model
+* cljdsl
 
 DSL-model is a sample library showing how to build a dsl lib in Clojure. 
 
 
 
-## Usage
+** Usage
 
-[![Clojars Project](https://img.shields.io/clojars/v/org.clojars.abdullin/cljdsl.svg)](https://clojars.org/org.clojars.abdullin/cljdsl)
-
+[[https://img.shields.io/clojars/v/org.clojars.abdullin/cljdsl.svg]] - [[https://clojars.org/org.clojars.abdullin/cljdsl][Clojar]]
 
 Try running something along these lines:
 
-```bash
+#+BEGIN_SRC bash
 $ lein run samples/catalogue.clj
-```
+#+END_SRC
 
-
-## License
+** License
 
 Copyright © 2017 Rinat Abdullin
 
